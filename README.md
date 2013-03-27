@@ -40,5 +40,5 @@ Acknowledgements & Licensing
 ----------------------------
 * The speedtest script is a variant of the one provided [here](http://tech.ivkin.net/wiki/Run_Speedtest_from_command_line), which has been slighlty amended to calculate and store average values suitable for graphing.
 
-* Graphs are produced using [Simile Timeplot](http://www.simile-widgets.org/timeplot/).  Timeplot is licensed under under the [BSD licence](http://simile.mit.edu/license.html), a copy of which can be found in the accompanying LICENSE.txt file.
+* Graphs are produced using [Simile Timeplot](http://www.simile-widgets.org/timeplot/).  Timeplot is licensed under under the [BSD licence](http://simile.mit.edu/license.html).
 
