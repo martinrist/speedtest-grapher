@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <title>Virgin Media broadband performance</title>
+    <script src="http://api.simile-widgets.org/timeplot/1.1/timeplot-api.js" 
+       type="text/javascript"></script>
+    <script type="text/javascript">
+      var timeplot;
+
+      function onLoad() {
+
+        var eventSourceBristol = new Timeplot.DefaultEventSource();
+        var plotInfoBristol = [
+          Timeplot.createPlotInfo({
+            id: "plot-bristol",
+            dataSource: new Timeplot.ColumnSource(eventSourceBristol, 1),
+            valueGeometry: new Timeplot.DefaultValueGeometry({
+              gridColor: "#000000",
+              axisLabelsPlacement: "left",
+              min: 0,
+              max: 50
+            }),
+            timeGeometry: new Timeplot.DefaultTimeGeometry({
+              gridColor: "#000000",
+              axisLabelsPlacement: "bottom"
+            }),
+            showValues: true,
+            roundValues: false,
+            lineColor: "#ff0000",
+            fillColor: "#cc8080"
+          })
+        ];
+        timeplotBristol = Timeplot.create(document.getElementById("bristol-timeplot"), plotInfoBristol);
+        timeplotBristol.loadText("data/data_Bristol_down_avg.txt", ",", eventSourceBristol);
+
+        var eventSourceGlos = new Timeplot.DefaultEventSource();
+        var plotInfoGlos = [
+          Timeplot.createPlotInfo({
+            id: "plot-glos",
+            dataSource: new Timeplot.ColumnSource(eventSourceGlos, 1),
+            valueGeometry: new Timeplot.DefaultValueGeometry({
+              gridColor: "#000000",
+              axisLabelsPlacement: "left",
+              min: 0,
+              max: 50
+            }),
+            timeGeometry: new Timeplot.DefaultTimeGeometry({
+              gridColor: "#000000",
+              axisLabelsPlacement: "bottom"
+            }),
+            showValues: true,
+            roundValues: false,
+            lineColor: "#0000ff",
+            fillColor: "#8080cc"
+          })
+        ];
+        timeplotGlos = Timeplot.create(document.getElementById("glos-timeplot"), plotInfoGlos);
+        timeplotGlos.loadText("data/data_Gloucester_down_avg.txt", ",", eventSourceGlos);
+      }
+
+      var resizeTimerID = null;
+      function onResize() {
+      if (resizeTimerID == null) {
+        resizeTimerID = window.setTimeout(function() {
+          resizeTimerID = null;
+          timeplotBristol.repaint();
+          timeplotGlos.repaint();
+        }, 100);
+      }
+    }
+    </script>
+
+  </head>
+  <body onload="onLoad();" onresize="onResize();">
+    <div>
+      <h1>Bristol - Download (Mbps)</h1>
+      <div id="bristol-timeplot" style="height: 200px;"/>
+    </div>
+    <div>
+      <h1>Gloucester - Download (Mbps)</h1>
+      <div id="glos-timeplot" style="height: 200px;"/>
+    </div>
+    <p>Click <a href="data/">here</a> to access raw data</p>
+  </body>
+</html>
